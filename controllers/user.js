@@ -1,10 +1,11 @@
-const { NODE_ENV, JWT_SECRET, DEV_SECRET } = process.env;
+const { NODE_ENV, JWT_SECRET } = process.env;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const NotFoundError = require('../errors/not-found-error');
 const BadRequestError = require('../errors/bad-request-error');
 const { badRequestMessage, notFoundMessage } = require('../messages');
+const { DEV_SECRET } = require('../config');
 
 /* Возвращает информацию о пользователе (email и имя) */
 const getUser = (req, res, next) => {

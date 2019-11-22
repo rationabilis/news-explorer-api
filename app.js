@@ -14,13 +14,13 @@ const loginRouter = require('./routes/login');
 const createUserRouter = require('./routes/create-user');
 const NotFoundError = require('./errors/not-found-error');
 const { notFoundMessage, serverErrorMessage } = require('./messages');
-
+const { MONGODEV, RATELIMWIN, RATELIMMAX } = require('./config');
 
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 10,
+  windowMs: RATELIMWIN,
+  max: RATELIMMAX,
 });
-const { PORT, MONGODB } = process.env;
+const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
 app.use(helmet());
 app.use(limiter);
@@ -55,7 +55,8 @@ app.use(errorLogger);
 
 app.use(errors());
 
-app.use((err, req, res) => {
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
   res
     .status(statusCode)
