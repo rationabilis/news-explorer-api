@@ -1,0 +1,53 @@
+{
+  "name": "news-explorer-api",
+  "version": "1.0.0",
+  "description": "Yandex.praktikum diploma project API",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rationabilis/news-explorer-api.git"
+  },
+  "keywords": [],
+  "author": "Alex Demin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rationabilis/news-explorer-api/issues"
+  },
+  "homepage": "https://github.com/rationabilis/news-explorer-api#readme",
+  "dependencies": {
+    "@hapi/joi": "^16.1.7",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "bowser": "^2.7.0",
+    "celebrate": "^10.1.0",
+    "cookie-parser": "^1.4.4",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.0.0",
+    "express-winston": "^4.0.1",
+    "helmet": "^3.21.2",
+    "joy": "^0.1.1",
+    "jquery": "^3.4.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.11",
+    "validator": "^12.0.0",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "nodemon": "^1.19.4",
+    "path": "^0.12.7",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0",
+    "webpack-md5-hash": "0.0.6"
+  }
+}
