@@ -1,6 +1,6 @@
 const Article = require('../models/article');
-const UnauthorizedError = require('../errors/unauthorized-error');
-const { unauthorizedMessage } = require('../messages');
+const ForbiddenError = require('../errors/forbidden-error');
+const { forbiddenMessage } = require('../messages');
 
 /* Возвращает все сохранённые пользователем статьи */
 const getAllArticles = (req, res, next) => {
@@ -28,7 +28,7 @@ const deleteArticle = (req, res, next) => {
     .then((article) => {
       const articleData = { data: article };
       if (JSON.stringify(articleData.data.owner) !== JSON.stringify(req.user._id)) {
-        throw new UnauthorizedError(unauthorizedMessage);
+        throw new ForbiddenError(forbiddenMessage);
       } else {
         Article.findByIdAndRemove(req.params.articleId)
           .then(() => res.send(articleData))

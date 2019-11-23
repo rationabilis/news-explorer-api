@@ -14,7 +14,8 @@ const loginRouter = require('./routes/login');
 const createUserRouter = require('./routes/create-user');
 const NotFoundError = require('./errors/not-found-error');
 const { notFoundMessage, serverErrorMessage } = require('./messages');
-const { MONGODEV, RATELIMWIN, RATELIMMAX } = require('./config');
+const { MONGODEV } = require('./config');
+const { RATELIMWIN, RATELIMMAX } = require('./constants');
 
 const limiter = rateLimit({
   windowMs: RATELIMWIN,
@@ -55,7 +56,6 @@ app.use(errorLogger);
 
 app.use(errors());
 
-// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
   res
@@ -63,6 +63,7 @@ app.use((err, req, res, next) => {
     .send({
       message: statusCode === 500 ? serverErrorMessage : message,
     });
+  next();
 });
 
 app.listen(PORT);
