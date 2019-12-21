@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const bodyParser = require('body-parser');
@@ -17,12 +18,17 @@ const { notFoundMessage, serverErrorMessage } = require('./messages');
 const { MONGODEV } = require('./config');
 const { RATELIMWIN, RATELIMMAX } = require('./constants');
 
+
 const limiter = rateLimit({
   windowMs: RATELIMWIN,
   max: RATELIMMAX,
 });
 const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
+app.use(cors(({
+  credentials: true,
+  origin: true,
+})));
 app.use(helmet());
 app.use(limiter);
 app.use(cookieParser());
