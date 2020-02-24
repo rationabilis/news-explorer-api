@@ -21,7 +21,7 @@ const { RATELIMWIN, RATELIMMAX } = require('./constants');
 const allowedCors = [
   'https://inscientia.ru',
   'http://inscientia.ru',
-  'localhost:3000',
+  'localhost:8080',
 ];
 const limiter = rateLimit({
   windowMs: RATELIMWIN,
@@ -31,6 +31,7 @@ const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
 app.use(cors());
 app.use((req, res, next) => {
+  console.log(req.headers);
   const { origin } = req.headers;
 
   if (allowedCors.includes(origin)) {
