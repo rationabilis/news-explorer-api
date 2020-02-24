@@ -21,7 +21,7 @@ const { RATELIMWIN, RATELIMMAX } = require('./constants');
 const allowedCors = [
   'https://inscientia.ru',
   'http://inscientia.ru',
-  'localhost:',
+  'localhost:8080',
 ];
 const limiter = rateLimit({
   windowMs: RATELIMWIN,
