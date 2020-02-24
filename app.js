@@ -29,6 +29,7 @@ const limiter = rateLimit({
 });
 const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
+app.use(cors());
 
 app.options((req, res, next) => {
   /* res.send({ message: req.headers, allowedCors }); */
@@ -41,8 +42,6 @@ app.options((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
   next();
 });
-
-/* app.options('/signup', cors()); */
 
 app.use(helmet());
 app.use(limiter);
