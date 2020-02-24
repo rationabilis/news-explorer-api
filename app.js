@@ -29,15 +29,15 @@ const limiter = rateLimit({
 });
 const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
-console.log(allowedCors);
+
 app.use((req, res, next) => {
   res.send({ message: req.headers, allowedCors });
-/*   const { origin } = req.headers; */
+  const { origin } = req.headers;
 
-/*   if (allowedCors.includes(origin)) {
+  if (allowedCors.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
-  } */
-  res.header('Access-Control-Allow-Origin', 'localhost:8080');
+  }
+  /* res.header('Access-Control-Allow-Origin', 'localhost:8080'); */
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
   res.send({ message: res.headers });
