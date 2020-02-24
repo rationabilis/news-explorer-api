@@ -29,9 +29,9 @@ const limiter = rateLimit({
 });
 const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
+app.use(cors());
 
 app.use((req, res, next) => {
-  res.send({ message: req.headers, allowedCors });
   const { origin } = req.headers;
   if (allowedCors.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
@@ -40,8 +40,6 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
   next();
 });
-
-app.use(cors());
 
 app.use(helmet());
 app.use(limiter);
@@ -55,7 +53,6 @@ mongoose.connect(MONGODB, {
   useCreateIndex: true,
   useFindAndModify: false,
 });
-
 
 app.use(express.static(path.join(__dirname, 'public')));
 
