@@ -21,7 +21,7 @@ const { RATELIMWIN, RATELIMMAX } = require('./constants');
 const allowedCors = [
   'https://inscientia.ru',
   'http://inscientia.ru',
-  'localhost:8080',
+  'localhost:',
 ];
 const limiter = rateLimit({
   windowMs: RATELIMWIN,
@@ -31,12 +31,14 @@ const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
 app.use(cors());
 app.use((req, res, next) => {
-  console.log(req.headers);
+  res.send({ message: req.headers, allowedCors });
   const { origin } = req.headers;
 
   if (allowedCors.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
   }
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
 
   next();
 });
