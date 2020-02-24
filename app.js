@@ -31,9 +31,9 @@ const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
 
 
-/* app.use((req, res, next) => {
+/* app.use((req, res, next) => { */
   /* res.send({ message: req.headers, allowedCors }); */
-  const { origin } = req.headers;
+/*   const { origin } = req.headers;
 
   if (allowedCors.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
@@ -41,9 +41,9 @@ const app = express();
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
   next();
-});
+}); */
 
-app.use(cors()); */
+/* app.use(cors()); */
 app.use(helmet());
 app.use(limiter);
 app.use(cookieParser());
@@ -57,7 +57,7 @@ mongoose.connect(MONGODB, {
   useFindAndModify: false,
 });
 
-app.options('/articles', cors());
+app.options('/signup', cors());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
