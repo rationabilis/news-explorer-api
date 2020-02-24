@@ -42,7 +42,7 @@ app.options((req, res, next) => {
   next();
 });
 
-app.options('/signup', cors());
+/* app.options('/signup', cors()); */
 
 app.use(helmet());
 app.use(limiter);
