@@ -18,11 +18,11 @@ const { notFoundMessage, serverErrorMessage } = require('./messages');
 const { MONGODEV } = require('./config');
 const { RATELIMWIN, RATELIMMAX } = require('./constants');
 
-const allowedCors = [
+/* const allowedCors = [
   'https://inscientia.ru',
   'http://inscientia.ru',
   'localhost:8080',
-];
+]; */
 const limiter = rateLimit({
   windowMs: RATELIMWIN,
   max: RATELIMMAX,
