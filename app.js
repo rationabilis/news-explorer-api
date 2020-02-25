@@ -43,7 +43,7 @@ const app = express();
   next();
 }); */
 
-/* app.use(cors()); */
+app.options('*', cors());
 app.use(helmet());
 app.use(limiter);
 app.use(cookieParser());
@@ -57,8 +57,8 @@ mongoose.connect(MONGODB, {
   useFindAndModify: false,
 });
 
-app.options('/signup', cors());
-app.options('/users', cors());
+/* app.options('/signup', cors());
+app.options('/users', cors()); */
 
 app.use(express.static(path.join(__dirname, 'public')));
 
