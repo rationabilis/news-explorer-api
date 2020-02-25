@@ -58,6 +58,7 @@ mongoose.connect(MONGODB, {
 });
 
 app.options('/signup', cors());
+app.options('/users', cors());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
