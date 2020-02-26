@@ -43,7 +43,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.options(cors());
+app.use(cors());
 app.use(helmet());
 app.use(limiter);
 app.use(cookieParser());
