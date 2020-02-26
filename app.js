@@ -18,11 +18,11 @@ const { notFoundMessage, serverErrorMessage } = require('./messages');
 const { MONGODEV } = require('./config');
 const { RATELIMWIN, RATELIMMAX } = require('./constants');
 
-/* const allowedCors = [
+const allowedCors = [
   'https://inscientia.ru',
   'http://inscientia.ru',
-  'localhost:8080',
-]; */
+  'http://localhost:8080',
+];
 const limiter = rateLimit({
   windowMs: RATELIMWIN,
   max: RATELIMMAX,
@@ -31,9 +31,9 @@ const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
 
 
-/* app.use((req, res, next) => { */
-  /* res.send({ message: req.headers, allowedCors }); */
-/*   const { origin } = req.headers;
+app.use((req, res, next) => {
+  res.send({ message: req.headers, allowedCors });
+  const { origin } = req.headers;
 
   if (allowedCors.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
@@ -41,9 +41,9 @@ const app = express();
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
   next();
-}); */
+});
 
-app.options('*', cors());
+/* app.options('*', cors()); */
 app.use(helmet());
 app.use(limiter);
 app.use(cookieParser());

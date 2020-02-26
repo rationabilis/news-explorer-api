@@ -55,4 +55,16 @@ const login = (req, res, next) => {
     });
 };
 
-module.exports = { getUser, createUser, login };
+/* Выход пользователя */
+const logout = (req, res, next) => res
+  .status(201)
+  .cookie('jwt', '', {
+    maxAge: 0,
+    httpOnly: true,
+    sameSite: false,
+  }).send({ login: false });
+
+
+module.exports = {
+  getUser, createUser, login, logout,
+};
