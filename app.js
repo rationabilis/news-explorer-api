@@ -45,7 +45,7 @@ mongoose.connect(MONGODB, {
 });
 
 app.set('trust proxy', true);
-app.use(cors(({
+app.use('*', cors(({
   credentials: true,
   origin: true,
 })));
