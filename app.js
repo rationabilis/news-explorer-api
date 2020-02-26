@@ -44,6 +44,7 @@ mongoose.connect(MONGODB, {
   useFindAndModify: false,
 });
 
+app.set('trust proxy', true);
 app.use(cors(({
   credentials: true,
   origin: true,
