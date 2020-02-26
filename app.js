@@ -34,7 +34,7 @@ const app = express();
 app.use(helmet());
 app.use(limiter);
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 mongoose.connect(MONGODB, {
