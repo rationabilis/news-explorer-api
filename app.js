@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const auth = require('./middlewares/auth');
 const articlesRouter = require('./routes/articles');
 const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
@@ -18,11 +19,11 @@ const { notFoundMessage, serverErrorMessage } = require('./messages');
 const { MONGODEV } = require('./config');
 const { RATELIMWIN, RATELIMMAX } = require('./constants');
 
-const allowedCors = [
+/* const allowedCors = [
   'https://inscientia.ru',
   'http://inscientia.ru',
   'http://localhost:8080',
-];
+]; */
 const limiter = rateLimit({
   windowMs: RATELIMWIN,
   max: RATELIMMAX,
@@ -54,6 +55,8 @@ app.use(requestLogger);
 
 app.use('/signup', createUserRouter);
 app.use('/signin', loginRouter);
+
+app.use(auth);
 
 app.use('/users', usersRouter);
 app.use('/articles', articlesRouter);
