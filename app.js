@@ -19,11 +19,11 @@ const { notFoundMessage, serverErrorMessage } = require('./messages');
 const { MONGODEV } = require('./config');
 const { RATELIMWIN, RATELIMMAX } = require('./constants');
 
-const allowedCors = [
+/* const allowedCors = [
   'https://inscientia.ru',
   'http://inscientia.ru',
   'http://localhost:8080',
-];
+]; */
 const limiter = rateLimit({
   windowMs: RATELIMWIN,
   max: RATELIMMAX,
@@ -43,7 +43,7 @@ mongoose.connect(MONGODB, {
   useCreateIndex: true,
   useFindAndModify: false,
 });
-
+/*
 app.use((req, res, next) => {
   const { origin } = req.headers;
 
@@ -52,13 +52,10 @@ app.use((req, res, next) => {
   }
 
   next();
-});
-app.use(cors(({
-  credentials: true,
-  origin: true,
-})));
+}); */
+app.use(cors());
 
-app.use(express.static(path.join(__dirname, 'public')));
+/* app.use(express.static(path.join(__dirname, 'public'))); */
 
 app.use(requestLogger);
 
