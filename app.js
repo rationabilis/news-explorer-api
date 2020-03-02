@@ -30,7 +30,7 @@ const limiter = rateLimit({
 });
 const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
-app.options('*', cors())
+app.options('*', cors());
 
 app.use(helmet());
 app.use(limiter);
