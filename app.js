@@ -53,10 +53,10 @@ app.use((req, res, next) => {
 
   next();
 });
-/* app.use(cors(({
+app.use(cors(({
   credentials: true,
   origin: true,
-}))); */
+})));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
