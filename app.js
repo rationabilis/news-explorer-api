@@ -30,11 +30,14 @@ const limiter = rateLimit({
 });
 const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
-app.set('trust proxy', 1);
-app.use(cors(({
+app.use(cors({
+  orirgin: ['https://inscientia.ru',
+    'http://inscientia.ru',
+    'http://localhost:8080'],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
-  origin: true,
-})));
+  preflightContinue: false,
+}));
 
 app.use(helmet());
 app.use(limiter);
