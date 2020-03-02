@@ -31,9 +31,7 @@ const limiter = rateLimit({
 const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
 app.use(cors({
-  orirgin: ['https://inscientia.ru',
-    'http://inscientia.ru',
-    'http://localhost:8080'],
+  orirgin: '*',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   preflightContinue: false,
