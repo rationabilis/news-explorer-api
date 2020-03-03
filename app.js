@@ -25,11 +25,8 @@ const limiter = rateLimit({
 });
 const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
-app.set('trust proxy', 1);
-app.use(cors(({
-  credentials: true,
-  origin: true,
-})));
+
+app.use(cors());
 
 app.use(helmet());
 app.use(limiter);
