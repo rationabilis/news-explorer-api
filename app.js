@@ -30,11 +30,12 @@ const limiter = rateLimit({
 });
 const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
-app.use(function(req, res, next) {
+app.use(cors());
+app.use((req, res, next) => {
   const { origin } = req.headers;
 
   if (allowedCors.includes(origin)) {
-      res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Origin', origin);
   }
 
   next();
