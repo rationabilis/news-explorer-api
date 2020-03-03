@@ -40,10 +40,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cors(({
+/* app.use(cors(({
   credentials: true,
   origin: true,
-})));
+}))); */
 
 app.use(helmet());
 app.use(limiter);
@@ -58,7 +58,7 @@ mongoose.connect(MONGODB, {
   useFindAndModify: false,
 });
 
-/* app.use(express.static(path.join(__dirname, 'public'))); */
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(requestLogger);
 
