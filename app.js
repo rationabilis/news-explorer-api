@@ -60,11 +60,13 @@ app.use(cors({
   preflightContinue: false,
 }));
 
-app.use(helmet());
 app.use(limiter);
-app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
+app.use(helmet());
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(cookieParser());
 
 mongoose.connect(MONGODB, {
   useUnifiedTopology: true,
