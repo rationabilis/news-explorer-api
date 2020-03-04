@@ -27,6 +27,7 @@ const createUser = (req, res, next) => {
       password: hash,
     }))
     .then((user) => {
+      console.log(user);
       if (!user) { throw new BadRequestError(badRequestMessage); }
       return res.send({ user: user.name, email: user.email });
     })
@@ -38,6 +39,7 @@ const login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
+      console.log(user);
       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : DEV_SECRET, { expiresIn: '7d' });
       res
         .status(201)
