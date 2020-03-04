@@ -11,6 +11,7 @@ const { DEV_SECRET } = require('../config');
 const getUser = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
+      res.send({ user });
       if (!user) {
         throw new NotFoundError(notFoundMessage);
       } else res.send({ user: user.name, email: user.email });
