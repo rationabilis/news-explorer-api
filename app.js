@@ -23,6 +23,7 @@ const allowedCors = [
   'https://inscientia.ru',
   'http://inscientia.ru',
   'http://localhost:8080',
+  'https://rationabilis.github.io',
 ];
 const limiter = rateLimit({
   windowMs: RATELIMWIN,
@@ -39,11 +40,6 @@ app.use((req, res, next) => {
 
   next();
 });
-
-/* app.use(cors(({
-  credentials: true,
-  origin: true,
-}))); */
 
 app.use(helmet());
 app.use(limiter);
