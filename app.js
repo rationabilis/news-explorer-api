@@ -19,12 +19,12 @@ const { notFoundMessage, serverErrorMessage } = require('./messages');
 const { MONGODEV } = require('./config');
 const { RATELIMWIN, RATELIMMAX } = require('./constants');
 
-/* const allowedCors = [
+const allowedCors = [
   'https://inscientia.ru',
   'http://inscientia.ru',
   'http://localhost:8080',
   'https://rationabilis.github.io',
-]; */
+];
 const limiter = rateLimit({
   windowMs: RATELIMWIN,
   max: RATELIMMAX,
@@ -32,17 +32,15 @@ const limiter = rateLimit({
 const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
 app.use(cors());
-/* app.get('/users/me', (req, res, next) => {
-  res.json({ msg: 'This is CORS-enabled for all origins!' });
-}); */
+
 app.use((req, res, next) => {
   const { origin } = req.headers;
 
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-/*   if (allowedCors.includes(origin)) {
+  /* res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept'); */
+  /* res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE'); */
+  if (allowedCors.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
-  } */
+  }
 
   next();
 });
