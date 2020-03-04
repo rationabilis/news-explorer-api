@@ -32,7 +32,7 @@ const limiter = rateLimit({
 const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
 app.options('*', cors());
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
   const { origin } = req.headers;
 
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -42,7 +42,7 @@ app.use((req, res, next) => {
   }
 
   next();
-});
+}); */
 
 app.use(helmet());
 app.use(limiter);
