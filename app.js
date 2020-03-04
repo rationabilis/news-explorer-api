@@ -33,7 +33,7 @@ const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
 /* app.use(cors()); */
 
-app.options((req, res, next) => {
+app.use((req, res, next) => {
   const { origin } = req.headers;
 
   /* res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept'); */
