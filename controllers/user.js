@@ -56,6 +56,7 @@ const login = (req, res, next) => {
 };
 
 /* Выход пользователя */
+// eslint-disable-next-line no-unused-vars
 const logout = (req, res, next) => res
   .status(201)
   .cookie('jwt', '', {
