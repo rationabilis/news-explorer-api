@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-/* const helmet = require('helmet'); */
+const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
@@ -31,13 +31,13 @@ const limiter = rateLimit({
 });
 const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
-
-app.use(cors(({
+app.use(cors());
+/* app.use(cors(({
   credentials: true,
   origin: true,
-})));
+}))); */
 
-/* app.use(helmet()); */
+app.use(helmet());
 app.use(limiter);
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
