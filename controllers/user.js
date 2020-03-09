@@ -45,7 +45,7 @@ const login = (req, res, next) => {
           maxAge: 3600000 * 24 * 7,
           httpOnly: true,
           sameSite: true,
-        }).send({ message: 'Успешный вход' })
+        }).send({ message: 'Успешный вход', token })
         .end();
     })
     .catch((error) => {
@@ -63,7 +63,7 @@ const logout = (req, res, next) => res
     maxAge: 0,
     httpOnly: true,
     sameSite: false,
-  }).send({ login: false });
+  }).send({ message: 'Успешный выход' });
 
 
 module.exports = {

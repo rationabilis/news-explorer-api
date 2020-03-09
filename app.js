@@ -12,6 +12,7 @@ const auth = require('./middlewares/auth');
 const articlesRouter = require('./routes/articles');
 const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
+const logoutRouter = require('./routes/logout');
 const createUserRouter = require('./routes/create-user');
 const NotFoundError = require('./errors/not-found-error');
 const { notFoundMessage, serverErrorMessage } = require('./messages');
@@ -31,7 +32,10 @@ const limiter = rateLimit({
 const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
 
-app.use(cors());
+app.use(cors(({
+  credentials: true,
+  origin: true,
+})));
 
 /* app.use(helmet()); */
 app.use(limiter);
@@ -52,8 +56,10 @@ app.use(requestLogger);
 
 app.use('/signup', createUserRouter);
 app.use('/signin', loginRouter);
+app.use('/logout', logoutRouter);
 
 app.use(auth);
+
 
 app.use('/users', usersRouter);
 app.use('/articles', articlesRouter);

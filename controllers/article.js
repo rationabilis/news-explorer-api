@@ -18,7 +18,7 @@ const createArticle = (req, res, next) => {
   Article.create({
     keyword, title, text, date, source, link, image, owner: req.user._id,
   })
-    .then((article) => res.send({ data: article }))
+    .then((article) => res.send(article))
     .catch(next);
 };
 
