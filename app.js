@@ -32,10 +32,11 @@ const limiter = rateLimit({
 const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
 
-app.use(cors(({
+app.use(cors());
+/* app.use(cors(({
   credentials: true,
   origin: true,
-})));
+}))); */
 /* app.use((req, res, next) => {
   const { origin } = req.headers;
 
