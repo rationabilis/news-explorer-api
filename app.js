@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-/* const cors = require('cors'); */
+const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
@@ -19,12 +19,12 @@ const { notFoundMessage, serverErrorMessage } = require('./messages');
 const { MONGODEV } = require('./config');
 const { RATELIMWIN, RATELIMMAX } = require('./constants');
 
-const allowedCors = [
+/* const allowedCors = [
   'https://inscientia.ru',
   'http://inscientia.ru',
   'http://localhost:8080',
   'https://rationabilis.github.io',
-];
+]; */
 const limiter = rateLimit({
   windowMs: RATELIMWIN,
   max: RATELIMMAX,
@@ -32,11 +32,11 @@ const limiter = rateLimit({
 const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
 
-/* app.use(cors(({
+app.use(cors(({
   credentials: true,
   origin: true,
-}))); */
-app.use((req, res, next) => {
+})));
+/* app.use((req, res, next) => {
   const { origin } = req.headers;
 
   if (allowedCors.includes(origin)) {
@@ -44,7 +44,7 @@ app.use((req, res, next) => {
   }
 
   next();
-});
+}); */
 
 app.use(helmet());
 app.use(limiter);
