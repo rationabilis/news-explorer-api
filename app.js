@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-/* const cors = require('cors'); */
+const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
@@ -32,6 +32,7 @@ const limiter = rateLimit({
 const { PORT = 3000, MONGODB = MONGODEV } = process.env;
 const app = express();
 
+app.use(cors());
 app.use((req, res, next) => {
   const { origin } = req.headers;
 
@@ -41,7 +42,7 @@ app.use((req, res, next) => {
 
   next();
 });
-/* app.use(cors()); */
+
 /* app.use(cors(({
   credentials: true,
   origin: true,
