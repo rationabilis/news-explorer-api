@@ -40,14 +40,32 @@ const login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : DEV_SECRET, { expiresIn: '7d' });
       res
+        .status(201)
         .cookie('jwt', token, {
           maxAge: 3600000 * 24 * 7,
           httpOnly: true,
           sameSite: true,
-        })
+        }).send({ message: 'Успешный вход' })
         .end();
     })
-    .catch(next);
+    .catch((error) => {
+      const err = new Error(error.message);
+      err.statusCode = 401;
+      next(err);
+    });
 };
 
-module.exports = { getUser, createUser, login };
+/* Выход пользователя */
+// eslint-disable-next-line no-unused-vars
+const logout = (req, res, next) => res
+  .status(201)
+  .cookie('jwt', '', {
+    maxAge: 0,
+    httpOnly: true,
+    sameSite: false,
+  }).send({ login: false });
+
+
+module.exports = {
+  getUser, createUser, login, logout,
+};
